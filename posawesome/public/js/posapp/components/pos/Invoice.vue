@@ -101,7 +101,6 @@
             hide-details
             :value="formtCurrency(delivery_charges_rate)"
             :prefix="currencySymbol(pos_profile.currency)"
-            disabled
           ></v-text-field>
         </v-col>
       </v-row>
