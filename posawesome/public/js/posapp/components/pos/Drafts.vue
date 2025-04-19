@@ -104,6 +104,7 @@ export default {
       }
     },
   },
+
   created: function () {
     evntBus.$on('open_drafts', (data) => {
       this.draftsDialog = true;

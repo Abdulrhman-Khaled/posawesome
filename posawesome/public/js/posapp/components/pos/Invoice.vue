@@ -2677,6 +2677,7 @@ export default {
       this.cancel_invoice();
     });
     evntBus.$on("load_invoice", (data) => {
+      this.delivery_charges_rate = data.delivery_charges_rate;
       this.new_invoice(data);
       evntBus.$emit("set_pos_coupons", data.posa_coupons);
     });
