@@ -390,10 +390,10 @@ export default {
           value: "posting_date",
         },
         {
-          text: __("Due Date"),
+          text: __("Delivery Charges"),
           align: "start",
           sortable: true,
-          value: "due_date",
+          value: "posa_delivery_charges",
         },
         {
           text: __("Total"),
