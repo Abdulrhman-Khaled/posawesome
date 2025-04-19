@@ -247,22 +247,12 @@
             cols="6"
             v-if="pos_profile.posa_allow_credit_sale && !invoice_doc.is_return"
           >
-            <!-- <v-switch
+            <v-switch
               v-model="is_credit_sale"
               flat
               :label="frappe._('Is Credit Sale')"
               class="my-0 py-0"
-            ></v-switch> -->
-
-              <v-btn
-                block
-                :class="{ 'active': is_credit_sale }"
-                color="primary"
-                dark
-                @click="toggleCreditSale"
-              >
-                {{ frappe._('Is Credit Sale') }}: {{ is_credit_sale ? 'Yes' : 'No' }}
-            </v-btn>
+            ></v-switch>
           </v-col>
           <v-col
             cols="6"
@@ -922,11 +912,6 @@ export default {
             : 0;
       });
     },
-
-    toggleCreditSale() {
-      this.is_credit_sale = !this.is_credit_sale;
-    },
-    
     set_rest_amount(idx) {
       this.invoice_doc.payments.forEach((payment) => {
         if (
@@ -1490,9 +1475,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.active {
-  background-color: #1976d2;
-}
-</style>
