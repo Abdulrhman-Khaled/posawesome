@@ -392,7 +392,7 @@ export default {
         {
           text: __("Delivery Charges"),
           align: "start",
-          sortable: true,
+          sortable: false,
           value: "posa_delivery_charges",
         },
         {
