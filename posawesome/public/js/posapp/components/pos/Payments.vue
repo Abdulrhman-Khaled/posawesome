@@ -253,7 +253,8 @@
               :label="frappe._('Is Credit Sale')"
               class="my-0 py-0"
             ></v-switch> -->
-            <v-btn
+
+              <v-btn
                 block
                 :class="{ 'active': is_credit_sale }"
                 color="primary"
@@ -921,6 +922,11 @@ export default {
             : 0;
       });
     },
+
+    toggleCreditSale() {
+      this.is_credit_sale = !this.is_credit_sale;
+    },
+    
     set_rest_amount(idx) {
       this.invoice_doc.payments.forEach((payment) => {
         if (
@@ -1484,3 +1490,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.active {
+  background-color: #1976d2;
+}
+</style>
