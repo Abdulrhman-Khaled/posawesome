@@ -291,20 +291,20 @@ export default {
         });
         return;
       }
-      // if (!this.group) {
-      //   evntBus.$emit('show_mesage', {
-      //     text: __('Customer group is required.'),
-      //     color: 'error',
-      //   });
-      //   return;
-      // }
-      // if (!this.territory) {
-      //   evntBus.$emit('show_mesage', {
-      //     text: __('Customer territory is required.'),
-      //     color: 'error',
-      //   });
-      //   return;
-      // }
+      if (!this.group) {
+        evntBus.$emit('show_mesage', {
+          text: __('Customer group is required.'),
+          color: 'error',
+        });
+        return;
+      }
+      if (!this.territory) {
+        evntBus.$emit('show_mesage', {
+          text: __('Customer territory is required.'),
+          color: 'error',
+        });
+        return;
+      }
       if (this.customer_name) {
         const vm = this;
         const args = {
