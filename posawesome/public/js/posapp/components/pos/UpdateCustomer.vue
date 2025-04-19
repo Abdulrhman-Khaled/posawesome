@@ -123,7 +123,7 @@
                   dense
                   auto-select-first
                   color="primary"
-                  :label="frappe._('Customer Group') + ' *'"
+                  :label="frappe._('Customer Group')"
                   v-model="group"
                   :items="groups"
                   background-color="white"
@@ -139,7 +139,7 @@
                   dense
                   auto-select-first
                   color="primary"
-                  :label="frappe._('Territory') + ' *'"
+                  :label="frappe._('Territory')"
                   v-model="territory"
                   :items="territorys"
                   background-color="white"
