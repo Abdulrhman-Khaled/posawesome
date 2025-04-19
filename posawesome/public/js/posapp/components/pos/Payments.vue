@@ -227,6 +227,139 @@
           </v-col>
         </v-row>
         <v-divider></v-divider>
+        <v-row class="px-1 py-0" align="start" no-gutters>
+          <v-col
+            cols="6"
+            v-if="
+              pos_profile.posa_allow_write_off_change &&
+              diff_payment > 0 &&
+              !invoice_doc.is_return
+            "
+          >
+            <v-switch
+              class="my-0 py-0"
+              v-model="is_write_off_change"
+              flat
+              :label="frappe._('Write Off Difference Amount')"
+            ></v-switch>
+          </v-col>
+          <v-col
+            cols="6"
+            v-if="pos_profile.posa_allow_credit_sale && !invoice_doc.is_return"
+          >
+            <!-- <v-switch
+              v-model="is_credit_sale"
+              flat
+              :label="frappe._('Is Credit Sale')"
+              class="my-0 py-0"
+            ></v-switch> -->
+            <v-btn
+                block
+                :class="{ 'active': is_credit_sale }"
+                color="primary"
+                dark
+                @click="toggleCreditSale"
+              >
+                {{ frappe._('Is Credit Sale') }}: {{ is_credit_sale ? 'Yes' : 'No' }}
+            </v-btn>
+          </v-col>
+          <v-col
+            cols="6"
+            v-if="invoice_doc.is_return && pos_profile.use_cashback"
+          >
+            <v-switch
+              v-model="is_cashback"
+              flat
+              :label="frappe._('Is Cashback')"
+              class="my-0 py-0"
+            ></v-switch>
+          </v-col>
+          <v-col cols="6" v-if="is_credit_sale">
+            <v-menu
+              ref="date_menu"
+              v-model="date_menu"
+              :close-on-content-click="false"
+              transition="scale-transition"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="invoice_doc.due_date"
+                  :label="frappe._('Due Date')"
+                  readonly
+                  outlined
+                  dense
+                  hide-details
+                  v-bind="attrs"
+                  v-on="on"
+                  color="primary"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="invoice_doc.due_date"
+                no-title
+                scrollable
+                color="primary"
+                :min="frappe.datetime.now_date()"
+                @input="date_menu = false"
+              >
+              </v-date-picker>
+            </v-menu>
+          </v-col>
+          <v-col
+            cols="6"
+            v-if="!invoice_doc.is_return && pos_profile.use_customer_credit"
+          >
+            <v-switch
+              v-model="redeem_customer_credit"
+              flat
+              :label="frappe._('Use Customer Credit')"
+              class="my-0 py-0"
+              @change="get_available_credit($event)"
+            ></v-switch>
+          </v-col>
+        </v-row>
+        <div
+          v-if="
+            invoice_doc &&
+            available_customer_credit > 0 &&
+            !invoice_doc.is_return &&
+            redeem_customer_credit
+          "
+        >
+          <v-row v-for="(row, idx) in customer_credit_dict" :key="idx">
+            <v-col cols="4">
+              <div class="pa-2 py-3">{{ row.credit_origin }}</div>
+            </v-col>
+            <v-col cols="4">
+              <v-text-field
+                dense
+                outlined
+                color="primary"
+                :label="frappe._('Available Credit')"
+                background-color="white"
+                hide-details
+                :value="formtCurrency(row.total_credit)"
+                disabled
+                :prefix="currencySymbol(invoice_doc.currency)"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="4">
+              <v-text-field
+                dense
+                outlined
+                color="primary"
+                :label="frappe._('Redeem Credit')"
+                background-color="white"
+                hide-details
+                type="number"
+                v-model="row.credit_to_redeem"
+                :prefix="currencySymbol(invoice_doc.currency)"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </div>
+
+        <v-divider></v-divider>
 
         <v-row class="px-1 py-0">
           <v-col cols="6">
@@ -461,130 +594,7 @@
               </v-menu>
             </v-col>
           </v-row>
-        </div>
-        <v-divider></v-divider>
-        <v-row class="px-1 py-0" align="start" no-gutters>
-          <v-col
-            cols="6"
-            v-if="
-              pos_profile.posa_allow_write_off_change &&
-              diff_payment > 0 &&
-              !invoice_doc.is_return
-            "
-          >
-            <v-switch
-              class="my-0 py-0"
-              v-model="is_write_off_change"
-              flat
-              :label="frappe._('Write Off Difference Amount')"
-            ></v-switch>
-          </v-col>
-          <v-col
-            cols="6"
-            v-if="pos_profile.posa_allow_credit_sale && !invoice_doc.is_return"
-          >
-            <v-switch
-              v-model="is_credit_sale"
-              flat
-              :label="frappe._('Is Credit Sale')"
-              class="my-0 py-0"
-            ></v-switch>
-          </v-col>
-          <v-col
-            cols="6"
-            v-if="invoice_doc.is_return && pos_profile.use_cashback"
-          >
-            <v-switch
-              v-model="is_cashback"
-              flat
-              :label="frappe._('Is Cashback')"
-              class="my-0 py-0"
-            ></v-switch>
-          </v-col>
-          <v-col cols="6" v-if="is_credit_sale">
-            <v-menu
-              ref="date_menu"
-              v-model="date_menu"
-              :close-on-content-click="false"
-              transition="scale-transition"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="invoice_doc.due_date"
-                  :label="frappe._('Due Date')"
-                  readonly
-                  outlined
-                  dense
-                  hide-details
-                  v-bind="attrs"
-                  v-on="on"
-                  color="primary"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="invoice_doc.due_date"
-                no-title
-                scrollable
-                color="primary"
-                :min="frappe.datetime.now_date()"
-                @input="date_menu = false"
-              >
-              </v-date-picker>
-            </v-menu>
-          </v-col>
-          <v-col
-            cols="6"
-            v-if="!invoice_doc.is_return && pos_profile.use_customer_credit"
-          >
-            <v-switch
-              v-model="redeem_customer_credit"
-              flat
-              :label="frappe._('Use Customer Credit')"
-              class="my-0 py-0"
-              @change="get_available_credit($event)"
-            ></v-switch>
-          </v-col>
-        </v-row>
-        <div
-          v-if="
-            invoice_doc &&
-            available_customer_credit > 0 &&
-            !invoice_doc.is_return &&
-            redeem_customer_credit
-          "
-        >
-          <v-row v-for="(row, idx) in customer_credit_dict" :key="idx">
-            <v-col cols="4">
-              <div class="pa-2 py-3">{{ row.credit_origin }}</div>
-            </v-col>
-            <v-col cols="4">
-              <v-text-field
-                dense
-                outlined
-                color="primary"
-                :label="frappe._('Available Credit')"
-                background-color="white"
-                hide-details
-                :value="formtCurrency(row.total_credit)"
-                disabled
-                :prefix="currencySymbol(invoice_doc.currency)"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="4">
-              <v-text-field
-                dense
-                outlined
-                color="primary"
-                :label="frappe._('Redeem Credit')"
-                background-color="white"
-                hide-details
-                type="number"
-                v-model="row.credit_to_redeem"
-                :prefix="currencySymbol(invoice_doc.currency)"
-              ></v-text-field>
-            </v-col>
-          </v-row>
-        </div>
+        </div>     
         <v-divider></v-divider>
         <v-row class="pb-0 mb-2" align="start">
           <v-col cols="12">
