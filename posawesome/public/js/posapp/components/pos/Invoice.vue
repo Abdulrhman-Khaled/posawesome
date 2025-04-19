@@ -1184,8 +1184,8 @@ export default {
       doc.return_against = this.invoice_doc.return_against;
       doc.posa_offers = this.posa_offers;
       doc.posa_coupons = this.posa_coupons;
-      doc.posa_delivery_charges = 'test';
-      doc.posa_delivery_charges_rate = this.delivery_charges_rate || 5;
+      doc.posa_delivery_charges = this.selcted_delivery_charges.name;
+      doc.posa_delivery_charges_rate = this.delivery_charges_rate || 0;
       doc.posting_date = this.posting_date;
       return doc;
     },
@@ -2678,7 +2678,9 @@ export default {
     });
     evntBus.$on("load_invoice", (data) => {
       this.new_invoice(data);
-      // here123
+      // here
+      this.selcted_delivery_charges = data.delivery_charges;
+      this.delivery_charges_rate = data.delivery_charges_rate;
       this.set_delivery_charges();
       evntBus.$emit("set_pos_coupons", data.posa_coupons);
     });
