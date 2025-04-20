@@ -248,17 +248,15 @@
             v-if="pos_profile.posa_allow_credit_sale && !invoice_doc.is_return"
           >
           <template>
-            <div class="switch-container">
               <v-switch
                 v-model="is_credit_sale"               
                 inset
-                class="my-0 py-0 "
+                class="my-0 py-0"
               >
                 <template v-slot:label>
                   <span class="bold-label white-label">{{ frappe._('Is Credit Sale') }}</span>
                 </template>
               </v-switch>
-            </div>
           </template>
           </v-col>
           <v-col
@@ -1484,13 +1482,6 @@ export default {
 </script>
 
 <style scoped>
-.switch-container {
-  display: flex;
-  background-color: #0097A7;
-  padding: 5px;
-  margin-right: 20px;
-  border-radius: 6px;
-}
 
 .bold-label {
   font-weight: bold;
