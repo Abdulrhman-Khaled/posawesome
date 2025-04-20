@@ -2646,20 +2646,21 @@ export default {
       });
     },
     update_delivery_charges_rate_api() {
-      frappe.call({
-        method:
+      const vm = this;
+      
+      return frappe.call(
+       
           "posawesome.posawesome.api.posapp.update_delivery_charge_default_rate",
-        data: {
+       {
           name: this.selcted_delivery_charges.name,
           default_rate: this.delivery_charges_rate_input,
-        },
-        async: true,
-        callback: function (r) {
+        }
+      )
+        .then((r) => {
           if (r.message) {
-            vm.update_delivery_charges();
+            vm.set_delivery_charges();
           }
-        },
-      });
+        });
      
     },
 
