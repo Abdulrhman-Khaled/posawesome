@@ -248,7 +248,7 @@
             v-if="pos_profile.posa_allow_credit_sale && !invoice_doc.is_return"
           >
           <template>
-            <div class="border-primary">
+            <div class="switch-container">
               <v-switch
                 v-model="is_credit_sale"               
                 inset
@@ -1486,15 +1486,15 @@ export default {
 <style scoped>
 .switch-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: primary;
+  padding: 5px;
   margin-right: 20px;
   border-radius: 6px;
 }
 
 .bold-label {
   font-weight: bold;
-  color: black; 
+  color: white; 
   vertical-align: middle;
   margin-top: 6px;
 }
