@@ -101,6 +101,9 @@ doc_events = {
         "validate": "posawesome.posawesome.api.customer.validate",
         "after_insert": "posawesome.posawesome.api.customer.after_insert",
     },
+     "Delivery Charges": {
+        "validate": "posawesome.posawesome.api.posapp.update_delivery_charge_default_rate"
+    }
 }
 
 # Scheduled Tasks
