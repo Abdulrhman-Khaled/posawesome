@@ -228,18 +228,13 @@
           </v-col>
         </v-row>
         <v-divider></v-divider>
-        <v-col cols="8" >
           <v-text-field
-            dense
             outlined
             color="primary"
             :label="frappe._('Reference Number')"
             background-color="white"
-            hide-details
             :value="XXXXXXXX"
           ></v-text-field>
-        </v-col>
-           
         <v-divider></v-divider>
         <v-row class="px-1 py-0" align="start" no-gutters>
           <v-col
