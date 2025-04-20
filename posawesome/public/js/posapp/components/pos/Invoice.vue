@@ -2650,7 +2650,7 @@ export default {
         method:
           "posawesome.posawesome.api.posapp.update_delivery_charge_default_rate",
         args: {
-          name: selcted_delivery_charges.name,
+          name: this.selcted_delivery_charges.name,
           default_rate: this.delivery_charges_rate_input,
         },
         async: true,
