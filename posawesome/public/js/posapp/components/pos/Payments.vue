@@ -1486,7 +1486,7 @@ export default {
 <style scoped>
 .switch-container {
   display: flex;
-  background-color: primary;
+  background-color: #0097A7;
   padding: 5px;
   margin-right: 20px;
   border-radius: 6px;
