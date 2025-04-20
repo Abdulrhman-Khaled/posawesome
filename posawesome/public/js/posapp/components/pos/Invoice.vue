@@ -102,7 +102,7 @@
             :value="formtCurrency(delivery_charges_rate)"
             :prefix="currencySymbol(pos_profile.currency)"
             v-model="delivery_charges_rate_input"
-            @change="update_delivery_charges_rate()"
+            @change="update_delivery_charges_rate_api()"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -2637,6 +2637,41 @@ export default {
         },
       });
     },
+    update_delivery_charges_rate_api() {
+      if (this.selcted_delivery_charges) {
+      const newRate = isNaN(this.delivery_charges_rate_input) ? 0 : this.delivery_charges_rate_input;
+
+      try {
+        const deliveryChargesDoc = await this.$frappe.call({
+          method: 'frappe.get_doc',
+          args: {
+            doctype: 'Delivery Charges',
+            name: selcted_delivery_charges.name,
+          },
+        });
+
+        deliveryChargesDoc.default_rate = newRate;
+
+        await this.$frappe.call({
+          method: 'frappe.client.save',
+          args: {
+            doc: deliveryChargesDoc,
+          },
+        });
+
+        // Optionally, you could show a success message
+        this.$frappe.show_alert({ message: 'Delivery Charges updated successfully!', indicator: 'green' });
+      } catch (error) {
+        console.error('Error updating Delivery Charges:', error);
+        // Handle error (e.g., show an alert)
+        this.$frappe.show_alert({ message: 'Failed to update Delivery Charges.', indicator: 'red' });
+      }
+    } else {
+      this.delivery_charges_rate = 0;
+      this.delivery_charges_rate_input = 0;
+    }
+    },
+
     deliveryChargesFilter(item, queryText, itemText) {
       const textOne = item.name.toLowerCase();
       const searchText = queryText.toLowerCase();
@@ -2645,8 +2680,10 @@ export default {
     update_delivery_charges() {
       if (this.selcted_delivery_charges) {
         this.delivery_charges_rate = this.selcted_delivery_charges.rate;
+        this.delivery_charges_rate_input = this.selcted_delivery_charges.rate;
       } else {
         this.delivery_charges_rate = 0;
+        this.delivery_charges_rate_input = 0;
       }
     },
 
