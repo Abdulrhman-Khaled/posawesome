@@ -115,6 +115,7 @@ def check_opening_shift(user):
     return data
 
 
+@frappe.whitelist()
 def update_delivery_charge_default_rate(data):
     data = json.loads(data)
     doc = frappe.get_doc("Delivery Charges", data.get("name"))
