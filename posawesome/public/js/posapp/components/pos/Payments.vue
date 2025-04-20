@@ -229,16 +229,16 @@
         </v-row>
 
         <v-divider></v-divider>
-          <v-text-field
+          <!-- <v-text-field
             outlined
             color="primary"
             :label="frappe._('Reference Number')"
             background-color="white"
             placeholder="XXXXXXXX"
             hide-details
-            :value="invoice_doc.payments[0].custom_reference"
+            :value="invoice_doc.custom_reference_number"
           ></v-text-field>
-        <v-divider></v-divider>
+        <v-divider></v-divider> -->
         <v-row class="px-1 py-0" align="start" no-gutters>
           <v-col
             cols="6"
