@@ -249,7 +249,6 @@
           >
           <template>
             <div class="border-primary">
-              –v-border-color: #1976d2;
               <v-switch
                 v-model="is_credit_sale"               
                 inset
