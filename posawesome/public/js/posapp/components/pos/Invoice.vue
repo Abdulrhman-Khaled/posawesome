@@ -2637,13 +2637,14 @@ export default {
         },
       });
     },
-    update_delivery_charges_rate_api() {
+    update_delivery_charges_rate_api() {async
       if (this.selcted_delivery_charges) {
       const newRate = isNaN(this.delivery_charges_rate_input) ? 0 : this.delivery_charges_rate_input;
 
       try {
-        const deliveryChargesDoc = await this.$frappe.call({
+        const deliveryChargesDoc =  this.$frappe.call({
           method: 'frappe.get_doc',
+          async: true,
           args: {
             doctype: 'Delivery Charges',
             name: selcted_delivery_charges.name,
@@ -2652,8 +2653,9 @@ export default {
 
         deliveryChargesDoc.default_rate = newRate;
 
-        await this.$frappe.call({
+         this.$frappe.call({
           method: 'frappe.client.save',
+          async: true,
           args: {
             doc: deliveryChargesDoc,
           },
