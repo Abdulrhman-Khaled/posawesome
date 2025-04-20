@@ -115,6 +115,14 @@ def check_opening_shift(user):
     return data
 
 
+def update_delivery_charge_default_rate(data):
+    data = json.loads(data)
+    doc = frappe.get_doc("Delivery Charges", data.get("name"))
+    doc.default_rate = data.get("default_rate")
+    doc.save()
+    frappe.db.commit() 
+    
+
 def update_opening_shift_data(data, pos_profile):
     data["pos_profile"] = frappe.get_doc("POS Profile", pos_profile)
     data["company"] = frappe.get_doc("Company", data["pos_profile"].company)

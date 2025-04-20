@@ -104,16 +104,14 @@
             v-model="delivery_charges_rate_input"
             @change="update_delivery_charges_rate()"
           ></v-text-field>
- 
           <v-btn
-                      
-                      icon
-                      color="primary"
-                      @click.stop="update_delivery_charges_rate_api()"
-                    >
-                      <v-icon>mdi-plus-circle-outline</v-icon>
-                    </v-btn>
-
+                block
+                class="pa-0"
+                color="primary"
+                dark
+                @click="update_delivery_charges_rate_api"
+                >{{ __("Save") }}</v-btn
+              >
         </v-col>
       </v-row>
       <v-row
@@ -2647,41 +2645,22 @@ export default {
         },
       });
     },
-    update_delivery_charges_rate_api() {async
-      if (this.selcted_delivery_charges) {
-      const newRate = isNaN(this.delivery_charges_rate_input) ? 0 : this.delivery_charges_rate_input;
-
-      try {
-        const deliveryChargesDoc =  this.$frappe.call({
-          method: 'frappe.get_doc',
-          async: true,
-          args: {
-            doctype: 'Delivery Charges',
-            name: selcted_delivery_charges.name,
-          },
-        });
-
-        deliveryChargesDoc.default_rate = newRate;
-
-         this.$frappe.call({
-          method: 'frappe.client.save',
-           async: true,
-          args: {
-            doc: deliveryChargesDoc,
-          },
-        });
-
-        // Optionally, you could show a success message
-        this.$frappe.show_alert({ message: 'Delivery Charges updated successfully!', indicator: 'green' });
-      } catch (error) {
-        console.error('Error updating Delivery Charges:', error);
-        // Handle error (e.g., show an alert)
-        this.$frappe.show_alert({ message: 'Failed to update Delivery Charges.', indicator: 'red' });
-      }
-    } else {
-      this.delivery_charges_rate = 0;
-      this.delivery_charges_rate_input = 0;
-    }
+    update_delivery_charges_rate_api() {
+      frappe.call({
+        method:
+          "posawesome.posawesome.api.posapp.update_delivery_charge_default_rate",
+        args: {
+          name: selcted_delivery_charges.name,
+          default_rate: this.delivery_charges_rate_input,
+        },
+        async: true,
+        callback: function (r) {
+          if (r.message) {
+            vm.update_delivery_charges();
+          }
+        },
+      });
+     
     },
 
     deliveryChargesFilter(item, queryText, itemText) {
