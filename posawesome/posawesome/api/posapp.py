@@ -118,7 +118,7 @@ def check_opening_shift(user):
 @frappe.whitelist()
 def update_delivery_charge_default_rate(name, default_rate):
     doc = frappe.get_doc("Delivery Charges", name)
-    doc.default_rate = default_rate
+    doc.default_rate = float(default_rate) if default_rate else 5.0
     doc.save()
     frappe.db.commit() 
     
