@@ -1485,7 +1485,7 @@ export default {
 
 .bold-label {
   font-weight: bold;
-  color: white; 
+  color: black; 
   vertical-align: middle;
   margin-top: 6px;
 }
