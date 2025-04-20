@@ -2649,7 +2649,7 @@ export default {
       frappe.call({
         method:
           "posawesome.posawesome.api.posapp.update_delivery_charge_default_rate",
-        args: {
+        data: {
           name: this.selcted_delivery_charges.name,
           default_rate: this.delivery_charges_rate_input,
         },
