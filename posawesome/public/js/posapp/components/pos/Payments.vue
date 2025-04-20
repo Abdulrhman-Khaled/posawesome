@@ -248,11 +248,12 @@
             v-if="pos_profile.posa_allow_credit_sale && !invoice_doc.is_return"
           >
           <template>
-            <div class="switch-container">
+            <div class="border-primary">
+              –v-border-color: #1976d2;
               <v-switch
-                v-model="is_credit_sale"
-                flat
-                class="my-0 py-0"
+                v-model="is_credit_sale"               
+                inset
+                class="my-0 py-0 "
               >
                 <template v-slot:label>
                   <span class="bold-label white-label">{{ frappe._('Is Credit Sale') }}</span>
@@ -1490,8 +1491,6 @@ export default {
   justify-content: center;
   margin-right: 20px;
   border-radius: 6px;
-  border-color: #0097A7;
-  border-width: 2px;
 }
 
 .bold-label {
