@@ -102,8 +102,18 @@
             :value="formtCurrency(delivery_charges_rate)"
             :prefix="currencySymbol(pos_profile.currency)"
             v-model="delivery_charges_rate_input"
-            @change="update_delivery_charges_rate_api()"
+            @change="update_delivery_charges_rate()"
           ></v-text-field>
+ 
+          <v-btn
+                      
+                      icon
+                      color="primary"
+                      @click.stop="update_delivery_charges_rate_api()"
+                    >
+                      <v-icon>mdi-plus-circle-outline</v-icon>
+                    </v-btn>
+
         </v-col>
       </v-row>
       <v-row
@@ -2655,7 +2665,7 @@ export default {
 
          this.$frappe.call({
           method: 'frappe.client.save',
-          async: true,
+           async: true,
           args: {
             doc: deliveryChargesDoc,
           },
