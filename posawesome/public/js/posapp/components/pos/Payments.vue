@@ -252,7 +252,7 @@
               <v-switch
                 v-model="is_credit_sale"
                 flat
-                class="my-0 py-0 white-switch"
+                class="my-0 py-0"
               >
                 <template v-slot:label>
                   <span class="bold-label white-label">{{ frappe._('Is Credit Sale') }}</span>
@@ -1490,7 +1490,7 @@ export default {
   justify-content: center;
   margin-right: 20px;
   border-radius: 6px;
-  border-color: primary;
+  border-color: #0097A7;
   border-width: 2px;
 }
 
@@ -1498,10 +1498,7 @@ export default {
   font-weight: bold;
   color: black; 
   vertical-align: middle;
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
-.white-switch {
-  color: primary; 
-}
 </style>
