@@ -2650,7 +2650,7 @@ export default {
 
     update_delivery_charges_rate() {
       if (this.selcted_delivery_charges) {
-        this.delivery_charges_rate = this.delivery_charges_rate;
+        this.delivery_charges_rate = 8;
       } else {
         this.delivery_charges_rate = 0;
       }
