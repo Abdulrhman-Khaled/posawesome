@@ -1489,8 +1489,6 @@ export default {
   align-items: center;
   justify-content: center;
   background-color: #0097A7;
-  padding: 10px; 
-  border-radius: 5px;
 }
 
 .bold-label {
@@ -1499,6 +1497,6 @@ export default {
 }
 
 .white-switch {
-  background-color: white; 
+  color: white; 
 }
 </style>
