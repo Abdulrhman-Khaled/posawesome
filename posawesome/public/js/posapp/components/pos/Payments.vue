@@ -227,15 +227,16 @@
             ></v-text-field>
           </v-col>
         </v-row>
+
         <v-divider></v-divider>
           <v-text-field
             outlined
             color="primary"
             :label="frappe._('Reference Number')"
             background-color="white"
-            aria-placeholder="XXXXXXXX"
+            placeholder="XXXXXXXX"
             hide-details
-            :value="XXXXXXXX"
+            :value="invoice_doc.payments[0].custom_reference"
           ></v-text-field>
         <v-divider></v-divider>
         <v-row class="px-1 py-0" align="start" no-gutters>
