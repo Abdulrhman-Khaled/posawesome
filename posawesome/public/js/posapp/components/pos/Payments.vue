@@ -1488,7 +1488,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0097A7;
+  align-content: center;
+  background-color: #0096a7;
+  margin-right: 10px;
+  border-radius: 6px;
 }
 
 .bold-label {
