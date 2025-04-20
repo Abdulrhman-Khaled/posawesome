@@ -101,6 +101,7 @@
             hide-details
             :value="formtCurrency(delivery_charges_rate)"
             :prefix="currencySymbol(pos_profile.currency)"
+            v-model="delivery_charges_rate_input"
             @change="update_delivery_charges_rate()"
           ></v-text-field>
         </v-col>
@@ -853,6 +854,7 @@ export default {
       new_line: false,
       delivery_charges: [],
       delivery_charges_rate: 0,
+      delivery_charges_rate_input: 0,
       selcted_delivery_charges: {},
       invoice_posting_date: false,
       posting_date: frappe.datetime.nowdate(),
@@ -2650,7 +2652,7 @@ export default {
 
     update_delivery_charges_rate() {
       if (this.selcted_delivery_charges) {
-        this.delivery_charges_rate = 8;
+        this.delivery_charges_rate = this.delivery_charges_rate_input;
       } else {
         this.delivery_charges_rate = 0;
       }
