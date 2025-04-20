@@ -1488,18 +1488,20 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: lightgray;
   margin-right: 20px;
   border-radius: 6px;
+  border-color: primary;
+  border-width: 2px;
 }
 
 .bold-label {
   font-weight: bold;
   color: black; 
   vertical-align: middle;
+  margin-top: 5px;
 }
 
 .white-switch {
-  color: white; 
+  color: primary; 
 }
 </style>
