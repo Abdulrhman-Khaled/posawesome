@@ -233,6 +233,8 @@
             color="primary"
             :label="frappe._('Reference Number')"
             background-color="white"
+            aria-placeholder="XXXXXXXX"
+            hide-details
             :value="XXXXXXXX"
           ></v-text-field>
         <v-divider></v-divider>
