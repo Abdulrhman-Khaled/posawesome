@@ -1488,15 +1488,16 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  align-content: center;
-  background-color: #0096a7;
-  margin-right: 10px;
+  background-color: #68abb2;
+  padding: 8px 16px;
+  margin-right: 24px;
   border-radius: 6px;
 }
 
 .bold-label {
   font-weight: bold;
   color: white; 
+  vertical-align: middle;
 }
 
 .white-switch {
