@@ -101,6 +101,7 @@
             hide-details
             :value="formtCurrency(delivery_charges_rate)"
             :prefix="currencySymbol(pos_profile.currency)"
+            @change="update_delivery_charges_rate()"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -2642,6 +2643,14 @@ export default {
     update_delivery_charges() {
       if (this.selcted_delivery_charges) {
         this.delivery_charges_rate = this.selcted_delivery_charges.rate;
+      } else {
+        this.delivery_charges_rate = 0;
+      }
+    },
+
+    update_delivery_charges_rate() {
+      if (this.selcted_delivery_charges) {
+        this.delivery_charges_rate = this.delivery_charges_rate;
       } else {
         this.delivery_charges_rate = 0;
       }
