@@ -252,10 +252,10 @@
               <v-switch
                 v-model="is_credit_sale"
                 flat
-                class="my-0 py-0"
+                class="my-0 py-0 white-switch"
               >
                 <template v-slot:label>
-                  <span class="bold-label">{{ frappe._('Is Credit Sale') }}</span>
+                  <span class="bold-label white-label">{{ frappe._('Is Credit Sale') }}</span>
                 </template>
               </v-switch>
             </div>
@@ -1488,12 +1488,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0; /* Change this to your desired color */
-  padding: 10px; /* Adjust padding as needed */
-  border-radius: 5px; /* Optional: for rounded corners */
+  background-color: #0097A7;
+  padding: 10px; 
+  border-radius: 5px;
 }
 
 .bold-label {
-  font-weight: bold; /* Makes the label bold */
+  font-weight: bold;
+  color: white; 
+}
+
+.white-switch {
+  background-color: white; 
 }
 </style>
