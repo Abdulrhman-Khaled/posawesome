@@ -2300,9 +2300,6 @@ export default {
     });
     evntBus.$on("load_invoice", (data) => {
       this.new_invoice(data);
-      this.selcted_delivery_charges = data.posa_delivery_charges;
-      this.selcted_delivery_charges.default_rate = data.posa_delivery_charges_rate;
-      this.delivery_charges_rate_input = data.posa_delivery_charges_rate;
       evntBus.$emit("set_pos_coupons", data.posa_coupons);
     });
     evntBus.$on("set_offers", (data) => {
