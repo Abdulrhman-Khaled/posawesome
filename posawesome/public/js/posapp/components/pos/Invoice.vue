@@ -2229,7 +2229,9 @@ export default {
             default_rate: this.delivery_charges_rate_input,
           }
         }).then(() => {
+          backup_delivery_charges = this.selcted_delivery_charges;
           this.set_delivery_charges();
+          this.selcted_delivery_charges = backup_delivery_charges;
           evntBus.$emit('show_mesage', {
             text: __('Delivery charges rate updated.'),
             color: 'success',
