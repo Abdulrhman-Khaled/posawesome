@@ -2222,15 +2222,18 @@ export default {
 
     update_delivery_charges_rate_api() {
       if (this.selcted_delivery_charges) {
-        frappe.call(
-          "posawesome.posawesome.api.posapp.update_delivery_charge_default_rate", {
-          name: this.selcted_delivery_charges.name,
-          default_rate: this.delivery_charges_rate_input,
-        });
-        set_delivery_charges();
-        evntBus.$emit('show_mesage', {
-          text: __('Delivery charges rate updated.'),
-          color: 'success',
+        frappe.call({
+          method: "posawesome.posawesome.api.posapp.update_delivery_charge_default_rate",
+          args: {
+            name: this.selcted_delivery_charges.name,
+            default_rate: this.delivery_charges_rate_input,
+          }
+        }).then(() => {
+          this.set_delivery_charges();
+          evntBus.$emit('show_mesage', {
+            text: __('Delivery charges rate updated.'),
+            color: 'success',
+          });
         });
       } else {
         evntBus.$emit('show_mesage', {
