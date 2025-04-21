@@ -18,7 +18,7 @@
         class="text-uppercase primary--text"
       >
         <span class="font-weight-light">pos</span>
-        <span>awesome</span>
+        <span>ITQAN</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
