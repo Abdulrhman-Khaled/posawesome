@@ -2221,7 +2221,7 @@ export default {
     },
 
     update_delivery_charges_rate_api() {
-      if (this.selcted_delivery_charges) {
+      if (this.selcted_delivery_charges.name !== '') {
         frappe.call({
           method: "posawesome.posawesome.api.posapp.update_delivery_charge_default_rate",
           args: {
@@ -2299,8 +2299,8 @@ export default {
       this.cancel_invoice();
     });
     evntBus.$on("load_invoice", (data) => {
-      this.delivery_charges_rate = data.delivery_charges_rate;
       this.new_invoice(data);
+      this.selcted_delivery_charges = data.delivery_charges_rate;
       evntBus.$emit("set_pos_coupons", data.posa_coupons);
     });
     evntBus.$on("set_offers", (data) => {
