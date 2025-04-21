@@ -2229,9 +2229,8 @@ export default {
         })
           .then((r) => {
             if (r.exc) {
-              set_delivery_charges();
               evntBus.$emit('show_mesage', {
-                text: __('Delivery charges rate updated.'),
+                text: __(r.message),
                 color: 'success',
               });
             }
