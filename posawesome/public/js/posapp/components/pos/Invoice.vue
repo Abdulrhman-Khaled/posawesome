@@ -2228,11 +2228,14 @@ export default {
           default_rate: this.delivery_charges_rate_input,
         })
           .then((r) => {
-            set_delivery_charges();
-            evntBus.$emit('show_mesage', {
-          text: __('Delivery charges rate updated.'),
-          color: 'success',
-        });
+            if (r.exc) {
+              set_delivery_charges();
+              evntBus.$emit('show_mesage', {
+                text: __('Delivery charges rate updated.'),
+                color: 'success',
+              });
+            }
+
           });
       } else {
         evntBus.$emit('show_mesage', {
