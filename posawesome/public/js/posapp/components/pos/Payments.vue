@@ -229,16 +229,17 @@
         </v-row>
 
         <v-divider></v-divider>
-          <!-- <v-text-field
+          <v-text-field
             outlined
             color="primary"
             :label="frappe._('Reference Number')"
             background-color="white"
             placeholder="XXXXXXXX"
             hide-details
+            v-model="invoice_doc.custom_reference_number"
             :value="invoice_doc.custom_reference_number"
           ></v-text-field>
-        <v-divider></v-divider> -->
+        <v-divider></v-divider>
         <v-row class="px-1 py-0" align="start" no-gutters>
           <v-col
             cols="6"
@@ -896,6 +897,7 @@ export default {
       data["redeemed_customer_credit"] = this.redeemed_customer_credit;
       data["customer_credit_dict"] = this.customer_credit_dict;
       data["is_cashback"] = this.is_cashback;
+      
 
       const vm = this;
       frappe.call({
