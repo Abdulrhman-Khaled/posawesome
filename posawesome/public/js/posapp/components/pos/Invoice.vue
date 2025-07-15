@@ -672,8 +672,7 @@ export default {
       this.return_doc = "";
       this.discount_amount = 0;
       this.additional_discount_percentage = 0;
-      this.delivery_charges_rate = 0;
-      this.selcted_delivery_charges = {};
+      this.reset_delivery_charges();
       evntBus.$emit("set_customer_readonly", false);
       this.cancel_dialog = false;
     },
@@ -702,6 +701,7 @@ export default {
         this.additional_discount_percentage = 0;
         this.invoiceType = "Invoice";
         this.invoiceTypes = ["Invoice", "Order"];
+        this.reset_delivery_charges();
       } else {
         if (data.is_return) {
           evntBus.$emit("set_customer_readonly", true);
@@ -2245,6 +2245,12 @@ export default {
         return;
       }
 
+    },
+
+    reset_delivery_charges() {
+      this.delivery_charges = [];
+      this.delivery_charges_rate = 0;
+      this.selcted_delivery_charges = {};
     },
 
     deliveryChargesFilter(item, queryText, itemText) {
