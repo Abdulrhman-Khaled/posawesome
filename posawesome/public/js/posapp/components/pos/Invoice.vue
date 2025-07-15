@@ -2248,8 +2248,8 @@ export default {
     },
 
     reset_delivery_charges() {
-      this.delivery_charges = [];
       this.delivery_charges_rate = 0;
+      this.delivery_charges_rate_input = 0;
       this.selcted_delivery_charges = {};
     },
 
