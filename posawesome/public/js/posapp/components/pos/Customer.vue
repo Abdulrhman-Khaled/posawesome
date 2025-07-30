@@ -1,57 +1,25 @@
 <template>
   <div>
-    <v-autocomplete
-      dense
-      clearable
-      auto-select-first
-      outlined
-      color="primary"
-      :label="frappe._('Customer')"
-      v-model="customer"
-      :items="customers"
-      item-text="customer_name"
-      item-value="name"
-      background-color="white"
-      :no-data-text="__('Customer not found')"
-      hide-details
-      :filter="customFilter"
-      :disabled="readonly"
-      append-icon="mdi-plus"
-      @click:append="new_customer"
-      prepend-inner-icon="mdi-account-edit"
-      @click:prepend-inner="edit_customer"
-    >
+    <v-autocomplete dense clearable auto-select-first outlined color="primary" :label="frappe._('Customer')"
+      v-model="customer" :items="customers" item-text="customer_name" item-value="name" background-color="white"
+      :no-data-text="__('Customer not found')" hide-details :filter="customFilter" :disabled="readonly"
+      append-icon="mdi-plus" @click:append="new_customer" prepend-inner-icon="mdi-account-edit"
+      @click:prepend-inner="edit_customer">
       <template v-slot:item="data">
         <template>
           <v-list-item-content>
-            <v-list-item-title
-              class="primary--text subtitle-1"
-              v-html="data.item.customer_name"
-            ></v-list-item-title>
-            <v-list-item-subtitle
-              v-if="data.item.customer_name != data.item.name"
-              v-html="`ID: ${data.item.name}`"
-            ></v-list-item-subtitle>
-            <v-list-item-subtitle
-              v-if="data.item.customer_name != data.item.name"
-              v-html="`ID: ${data.item.name}`"
-            ></v-list-item-subtitle>
-            <v-list-item-subtitle
-              v-if="data.item.tax_id"
-              v-html="`TAX ID: ${data.item.tax_id}`"
-            ></v-list-item-subtitle>
-            <v-list-item-subtitle
-              v-if="data.item.email_id"
-              v-html="`Email: ${data.item.email_id}`"
-            ></v-list-item-subtitle>
-            <v-list-item-subtitle
-              v-if="data.item.mobile_no"
-              v-html="`Mobile No: ${data.item.mobile_no}`"
-            ></v-list-item-subtitle>
-            <v-list-item-subtitle
-              v-if="data.item.primary_address"
-              v-html="`Primary Address: ${data.item.primary_address}`"
-            ></v-list-item-subtitle>
+            <v-list-item-title class="primary--text subtitle-1" v-html="data.item.customer_name"></v-list-item-title>
+            <v-list-item-subtitle v-if="data.item.customer_name != data.item.name"
+              v-html="`ID: ${data.item.name}`"></v-list-item-subtitle>
+            <v-list-item-subtitle v-if="data.item.customer_name != data.item.name"
+              v-html="`ID: ${data.item.name}`"></v-list-item-subtitle>
+            <v-list-item-subtitle v-if="data.item.tax_id" v-html="`TAX ID: ${data.item.tax_id}`"></v-list-item-subtitle>
+            <v-list-item-subtitle v-if="data.item.email_id"
+              v-html="`Email: ${data.item.email_id}`"></v-list-item-subtitle>
+            <v-list-item-subtitle v-if="data.item.mobile_no"
+              v-html="`Mobile No: ${data.item.mobile_no}`"></v-list-item-subtitle>
+            <v-list-item-subtitle v-if="data.item.primary_address"
+              v-html="`Primary Address: ${data.item.primary_address}`"></v-list-item-subtitle>
           </v-list-item-content>
         </template>
       </template>
@@ -84,9 +52,9 @@ export default {
       if (this.customers.length > 0) {
         return;
       }
-      if (vm.pos_profile.posa_local_storage && localStorage.customer_storage) {
-        vm.customers = JSON.parse(localStorage.getItem('customer_storage'));
-      }
+      // if (vm.pos_profile.posa_local_storage && localStorage.customer_storage) {
+      //   vm.customers = JSON.parse(localStorage.getItem('customer_storage'));
+      // }
       frappe.call({
         method: 'posawesome.posawesome.api.posapp.get_customer_names',
         args: {
