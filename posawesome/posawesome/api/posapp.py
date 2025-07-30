@@ -412,13 +412,15 @@ def get_customer_group_condition(pos_profile):
 
 
 @frappe.whitelist()
-def get_customer_names(pos_profile):
+def get_customer_names(pos_profile, force_reload=False):
     _pos_profile = json.loads(pos_profile)
     ttl = _pos_profile.get("posa_server_cache_duration")
     if ttl:
         ttl = int(ttl) * 60
 
-    @redis_cache(ttl=ttl or 1800)
+    force_reload = frappe.utils.cint(force_reload)
+
+    #@redis_cache(ttl=ttl or 1800)
     def __get_customer_names(pos_profile):
         return _get_customer_names(pos_profile)
 

@@ -11,8 +11,6 @@
             <v-list-item-title class="primary--text subtitle-1" v-html="data.item.customer_name"></v-list-item-title>
             <v-list-item-subtitle v-if="data.item.customer_name != data.item.name"
               v-html="`ID: ${data.item.name}`"></v-list-item-subtitle>
-            <v-list-item-subtitle v-if="data.item.customer_name != data.item.name"
-              v-html="`ID: ${data.item.name}`"></v-list-item-subtitle>
             <v-list-item-subtitle v-if="data.item.tax_id" v-html="`TAX ID: ${data.item.tax_id}`"></v-list-item-subtitle>
             <v-list-item-subtitle v-if="data.item.email_id"
               v-html="`Email: ${data.item.email_id}`"></v-list-item-subtitle>
