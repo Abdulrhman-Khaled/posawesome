@@ -373,9 +373,19 @@ def process_pos_payment(payload):
         msg += "<thead><tr><th>Payment Entry</th><th>Amount</th></tr></thead>"
         msg += "<tbody>"
         for payment_entry in new_payments_entry:
-            msg += "<tr><td>{0}</td><td>{1}</td></tr>".format(
-                payment_entry.get("name"), payment_entry.get("unallocated_amount")
-            )
+            payment_name = payment_entry.get("name")
+            print_url = f"/printview?doctype=Payment%20Entry&name={payment_name}&trigger_print=1"
+            msg += f"""
+            <tr>
+                <td>
+                    {payment_name}
+                    <a href="{print_url}" target="_blank" class="btn btn-sm btn-primary ml-2">
+                        Print
+                    </a>
+                </td>
+                <td>{payment_entry.get("unallocated_amount")}</td>
+            </tr>
+            """
         msg += "</tbody>"
         msg += "</table>"
     if len(all_payments_entry) > 0 and len(data.selected_invoices) > 0:
